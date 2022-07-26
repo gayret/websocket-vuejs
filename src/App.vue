@@ -49,7 +49,9 @@ const onSendMessage = (e) => {
 
     <div class="input-with-button">
       <input v-model="state.websocketUrl" placeholder="Enter websocket url" type="text" />
-      <button @click="connect">Connect!</button>
+      <button v-if="state.socketConnected" @click="close">Close Connection</button>
+
+      <button v-else @click="connect">Connect!</button>
     </div>
 
     <div class="board">
@@ -64,12 +66,13 @@ const onSendMessage = (e) => {
       placeholder="Write a message"
       type="text"
     />
-
-    <button @click="close">Close Connection</button>
   </div>
 </template>
 
 <style scoped>
+.websocket {
+  width: 600px;
+}
 .input-with-button {
   display: grid;
   grid-template-columns: 5fr 1fr;
